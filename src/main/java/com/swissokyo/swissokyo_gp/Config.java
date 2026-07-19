@@ -1,42 +1,42 @@
 package com.swissokyo.swissokyo_gp;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
 public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec SPEC;
+    public static final Config INSTANCE;
+    public final ModConfigSpec.DoubleValue boatTargetSpeedBps;
+    public final ModConfigSpec.DoubleValue boatMaxSpeedLimitBps;
+    public final ModConfigSpec.DoubleValue boatAccelerationScale;
+    public final ModConfigSpec.DoubleValue boatInertia;
+    public final ModConfigSpec.BooleanValue boatJumpEnabled;
+    public final ModConfigSpec.DoubleValue boatJumpPower;
+    public final ModConfigSpec.IntValue boatJumpCooldown;
+    public final ModConfigSpec.DoubleValue hudSpeedMultiplier;
+    public final ModConfigSpec.BooleanValue engineSoundEnabled;
 
-    public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
-            .comment("Whether to log the dirt block on common setup")
-            .define("logDirtBlock", true);
+    Config(ModConfigSpec.Builder builder) {
+        builder.push("Physics");
+        this.boatTargetSpeedBps = builder.comment("Target speed in Blocks Per Second (BPS) when moving forward").defineInRange("targetSpeedBps", (double)20.0F, (double)0.0F, (double)2000.0F);
+        this.boatMaxSpeedLimitBps = builder.comment("Maximum absolute speed limit (BPS) and HUD bar scale").defineInRange("maxSpeedLimitBps", (double)40.0F, (double)0.0F, (double)2000.0F);
+        this.boatAccelerationScale = builder.comment("Physic smoothing factor (0.01 - 1.0). Lower = slower acceleration.").defineInRange("accelerationScale", 0.05, 0.001, (double)1.0F);
+        this.boatInertia = builder.comment("Inertia (Friction) when not accelerating.").defineInRange("inertia", 0.98, (double)0.0F, (double)1.0F);
+        this.boatJumpEnabled = builder.comment("Enable or disable boat jumping").define("jumpEnabled", true);
+        this.boatJumpPower = builder.comment("Jump power in blocks (1.0 - 100.0)").defineInRange("jumpPower", (double)1.0F, (double)1.0F, (double)100.0F);
+        this.boatJumpCooldown = builder.comment("Cooldown between jumps in ticks (20 ticks = 1 second)").defineInRange("jumpCooldown", 40, 0, 1000);
+        builder.pop();
+        builder.push("HUD");
+        this.hudSpeedMultiplier = builder.comment("Multiplier for the speedometer display value").defineInRange("speedMultiplier", 3.6, (double)0.0F, (double)1000.0F);
+        builder.pop();
+        builder.push("Sound");
+        this.engineSoundEnabled = builder.comment("Enable or disable boat engine sound effects").define("engineSoundEnabled", true);
+        builder.pop();
+    }
 
-    public static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
-
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
-
-    // a list of strings that are treated as resource locations for items
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", Config::validateItemName);
-
-    static final ModConfigSpec SPEC = BUILDER.build();
-
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+    static {
+        Pair<Config, ModConfigSpec> pair = (new ModConfigSpec.Builder()).configure(Config::new);
+        SPEC = (ModConfigSpec)pair.getRight();
+        INSTANCE = (Config)pair.getLeft();
     }
 }
