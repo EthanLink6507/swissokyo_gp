@@ -1,0 +1,13 @@
+{
+  "itemGroup.swissokyo_gp": "Example Mod Tab",
+  "block.swissokyo_gp.example_block": "Example Block",
+  "item.swissokyo_gp.example_item": "Example Item",
+
+  "swissokyo_gp.configuration.title": "Swissokyo GP Configs",
+  "swissokyo_gp.configuration.section.swissokyo_gp.common.toml": "Swissokyo GP Configs",
+  "swissokyo_gp.configuration.section.swissokyo_gp.common.toml.title": "Swissokyo GP Configs",
+  "swissokyo_gp.configuration.items": "Item List",
+  "swissokyo_gp.configuration.logDirtBlock": "Log Dirt Block",
+  "swissokyo_gp.configuration.magicNumberIntroduction": "Magic Number Text",
+  "swissokyo_gp.configuration.magicNumber": "Magic Number"
+}

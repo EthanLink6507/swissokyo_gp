@@ -1,0 +1,18 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+
+[[mods]]
+modId="swissokyo_gp"
+version="${file.jarVersion}"
+displayName="Ultimate Configurable Boats"
+displayURL="https://www.youtube.com/@ErenTheDeveloper"
+logoFile="logo.png"
+authors="Eren_The_Dev"
+description='''
+Fully customize boat physics with adjustable speed, jump height, and dynamic engine sounds.
+'''
+
+[[mixins]]
+config="swissokyo_gp.mixins.json"

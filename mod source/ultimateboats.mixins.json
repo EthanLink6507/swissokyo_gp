@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.triforce.swissokyo_gp.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "mixins": [
+        "BoatMixin",
+        "LivingEntityAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
