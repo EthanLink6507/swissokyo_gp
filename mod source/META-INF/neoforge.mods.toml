@@ -4,7 +4,7 @@ license="All Rights Reserved"
 issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
 
 [[mods]]
-modId="swissokyo_gp"
+modId="ultimateboats"
 version="${file.jarVersion}"
 displayName="Ultimate Configurable Boats"
 displayURL="https://www.youtube.com/@ErenTheDeveloper"
@@ -15,4 +15,4 @@ Fully customize boat physics with adjustable speed, jump height, and dynamic eng
 '''
 
 [[mixins]]
-config="swissokyo_gp.mixins.json"
+config="ultimateboats.mixins.json"

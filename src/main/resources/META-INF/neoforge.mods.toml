@@ -9,6 +9,7 @@ displayName="Swissokyo GP"
 #logoFile="examplemod.png"
 authors="EthanLink, LukamaSan"
 description="Mod for Swissokyo Grand Prix"
+config="swissokyo_gp.mixins.json"
 
 [[dependencies.swissokyo_gp]]
     modId="neoforge"

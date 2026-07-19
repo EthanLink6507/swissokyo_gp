@@ -1,7 +1,7 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "com.ocake.ultimateboats.mixin",
+    "package": "com.swissokyo.swissokyo_gp.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
         "BoatMixin",
